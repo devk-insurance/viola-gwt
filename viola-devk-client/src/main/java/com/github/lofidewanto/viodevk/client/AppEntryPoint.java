@@ -19,7 +19,7 @@ public class AppEntryPoint implements EntryPoint {
 		button.
 		button.addClickHandler(clickEvent -> {
 			Window.alert("Hello World Lofi!");
-			logger.info("Hello World!");
+			logger.info("Hello World Lofi!");
 		});
 
 		RootPanel.get("helloButton").add(button);
