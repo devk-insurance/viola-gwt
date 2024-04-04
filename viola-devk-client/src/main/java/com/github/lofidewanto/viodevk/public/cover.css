@@ -6,7 +6,7 @@
 .btn-light,
 .btn-light:hover,
 .btn-light:focus {
-  color: #333;
+  color: rgb(0, 84, 55);
   text-shadow: none;
   /* Prevent inheritance from `body` */
 }
@@ -45,4 +45,8 @@ body {
 .nav-masthead .active {
   color: #fff;
   border-bottom-color: #fff;
+}
+
+.devk-color {
+  color: rgb(0, 135, 70);
 }

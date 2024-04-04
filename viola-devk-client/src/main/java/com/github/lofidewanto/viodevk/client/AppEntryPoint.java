@@ -1,27 +1,24 @@
 package com.github.lofidewanto.viodevk.client;
 
-import java.util.logging.Logger;
-
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.dom.client.ButtonElement;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.RootPanel;
+import elemental2.dom.DomGlobal;
+import elemental2.dom.Event;
+import elemental2.dom.HTMLButtonElement;
+
+import java.util.logging.Logger;
 
 public class AppEntryPoint implements EntryPoint {
 
-	private static Logger logger = Logger
+	private static final Logger logger = Logger
 			.getLogger(AppEntryPoint.class.getName());
 
 	@Override
 	public void onModuleLoad() {
-		ButtonElement button = (ButtonElement) Document.get().getElementById("helloButton");
-		button.
-		button.addClickHandler(clickEvent -> {
-			Window.alert("Hello World Lofi!");
+		final HTMLButtonElement button = (HTMLButtonElement) DomGlobal.document.getElementById("helloButton");
+		button.addEventListener("click", (Event event) -> {
+            Window.alert("Hello World Lofi!");
 			logger.info("Hello World Lofi!");
-		});
-
-		RootPanel.get("helloButton").add(button);
+        });
 	}
 }
