@@ -18,8 +18,8 @@ public class AppEntryPoint implements EntryPoint {
     }
 
      void addTextArea() {
-        final HTMLTextAreaElement textArea = (HTMLTextAreaElement) getDocument().getElementById("stepsTextArea");
-        textArea.value = "Hier sind einige Schritte, die du stattdessen unternehmen kannst:\n\n" +
+        final HTMLTextAreaElement textArea = (HTMLTextAreaElement) DomGlobal.document.getElementById("stepsTextArea");
+        textArea.value = "Hier sind einige Schritte, die du unternehmen kannst:\n\n" +
                 "1. System?\n" +
                 "2. Benachrichtigung?\n" +
                 "3. Beweis?\n" +
@@ -27,14 +27,10 @@ public class AppEntryPoint implements EntryPoint {
     }
 
      void addButton() {
-        final HTMLButtonElement button = (HTMLButtonElement) getDocument().getElementById("helloButton");
+        final HTMLButtonElement button = (HTMLButtonElement) DomGlobal.document.getElementById("helloButton");
         button.addEventListener("click", (Event event) -> {
             logger.info("Button clicked");
             Window.alert("Hello World!");
         });
-    }
-    
-    HTMLDocument getDocument() {
-        return DomGlobal.document;
     }
 }

@@ -27,8 +27,6 @@ public class AppEntryPointTest {
     @Test
     public void addButton_created() {
         AppEntryPoint appEntryPoint = spy(AppEntryPoint.class);
-        when(appEntryPoint.getDocument()).thenReturn(document);
-        when(appEntryPoint.getDocument().getElementById("helloButton")).thenReturn(button);
 
         appEntryPoint.addButton();
 
