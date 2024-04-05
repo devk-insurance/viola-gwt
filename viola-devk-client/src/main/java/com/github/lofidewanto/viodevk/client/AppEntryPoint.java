@@ -12,10 +12,20 @@ public class AppEntryPoint implements EntryPoint {
     private static final Logger logger = Logger
             .getLogger(AppEntryPoint.class.getName());
 
+    private static void addJunitTextArea() {
+        final HTMLTextAreaElement junitTextArea = (HTMLTextAreaElement) DomGlobal.document.getElementById("junitTextArea");
+        junitTextArea.value = "boolean isEmailValid(String email) {\n" +
+                "    String emailRegex = \"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$\";\n" +
+                "    RegExp pattern = RegExp.compile(emailRegex);\n" +
+                "    return pattern.test(email);\n" +
+                "}";
+    }
+
     @Override
     public void onModuleLoad() {
         addHelloButton();
         addTextArea();
+        addJunitTextArea();
         addDeleteButton();
     }
 
@@ -50,11 +60,18 @@ public class AppEntryPoint implements EntryPoint {
         if (inputContent.isEmpty()) {
             Window.alert("Bitte geben Sie eine E-Mail-Adresse ein.");
         } else {
-            isEmailValid(inputContent);
+            boolean emailValid = isEmailValid(inputContent);
+            if (emailValid) {
+                Window.alert("E-Mail-Adresse " + inputContent + " ist valid, sie wird gelöscht.");
+                input.value = "";
+            } else {
+                Window.alert("E-Mail-Adresse " + inputContent + " ist ungültig.");
+            }
         }
     }
 
     boolean isEmailValid(String email) {
+        // String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         RegExp pattern = RegExp.compile(emailRegex);
         return pattern.test(email);
