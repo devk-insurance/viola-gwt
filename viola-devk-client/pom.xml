@@ -1,58 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<!-- Using gwt-boot-starter-parent -->
-		<groupId>com.github.gwtboot</groupId>
-		<artifactId>gwt-boot-starter-parent</artifactId>
-		<version>1.1.0</version>
-	</parent>
-	<artifactId>viola-devk-client</artifactId>
-	<groupId>com.github.lofidewanto</groupId>
-	<packaging>jar</packaging>
-	<name>viola-devk-client</name>
-	<version>1.0.0-SNAPSHOT</version>
-	<description>GWT Boot Sample - Basic</description>
-	
-	<properties>
-		<!-- Change to 11 if you want to use Java 11 -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <!-- Using gwt-boot-starter-parent -->
+        <groupId>com.github.gwtboot</groupId>
+        <artifactId>gwt-boot-starter-parent</artifactId>
+        <version>1.1.0</version>
+    </parent>
+    <artifactId>viola-devk-client</artifactId>
+    <groupId>com.github.lofidewanto</groupId>
+    <packaging>jar</packaging>
+    <name>viola-devk-client</name>
+    <version>1.0.0-SNAPSHOT</version>
+    <description>GWT Boot Sample - Basic</description>
+
+    <properties>
+        <!-- Change to 11 if you want to use Java 11 -->
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-	</properties>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+    </properties>
 
-	<dependencies>
-		<!-- GWT Starter Core - Basic -->
-		<dependency>
-			<groupId>com.github.gwtboot</groupId>
-			<artifactId>gwt-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.github.gwtboot</groupId>
-			<artifactId>gwt-boot-starter-elemento-core</artifactId>
-		</dependency>
+    <dependencies>
+        <!-- GWT Starter -->
+        <dependency>
+            <groupId>com.github.gwtboot</groupId>
+            <artifactId>gwt-boot-starter-elemento-core</artifactId>
+        </dependency>
 
-		<!-- GWT Starter Test -->
-		<dependency>
-			<groupId>com.github.gwtboot</groupId>
-			<artifactId>gwt-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.11.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<!-- GWT Maven Plugin -->
-			<plugin>
-				<groupId>net.ltgt.gwt.maven</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<configuration>
-					<moduleName>com.github.lofidewanto.viodevk.App</moduleName>
-					<startupUrls>
-						<url>/app/</url>
-					</startupUrls>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+            <!-- GWT Maven Plugin -->
+            <plugin>
+                <groupId>net.ltgt.gwt.maven</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <configuration>
+                    <moduleName>com.github.lofidewanto.viodevk.App</moduleName>
+                    <startupUrls>
+                        <url>/app/</url>
+                    </startupUrls>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

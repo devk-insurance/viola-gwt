@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to="app">
-	<!-- GWT Boot stuffs -->
-	<inherits name="com.github.gwtboot.starter.ElementoCoreStarter"/>
+    <!-- GWT Boot stuffs -->
+    <inherits name="com.github.gwtboot.starter.ElementoCoreStarter"/>
 
-	<!-- Entry Point -->
-	<entry-point class="com.github.lofidewanto.viodevk.client.AppEntryPoint"/>
+    <!-- Entry Point -->
+    <entry-point class="com.github.lofidewanto.viodevk.client.AppEntryPoint"/>
 </module>
