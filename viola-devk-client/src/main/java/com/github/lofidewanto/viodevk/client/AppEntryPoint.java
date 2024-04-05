@@ -1,7 +1,6 @@
 package com.github.lofidewanto.viodevk.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.Window;
 import elemental2.dom.*;
 
@@ -12,21 +11,22 @@ public class AppEntryPoint implements EntryPoint {
     private static final Logger logger = Logger
             .getLogger(AppEntryPoint.class.getName());
 
-    private static void addJunitTextArea() {
-        final HTMLTextAreaElement junitTextArea = (HTMLTextAreaElement) DomGlobal.document.getElementById("junitTextArea");
-        junitTextArea.value = "boolean isEmailValid(String email) {\n" +
-                "    String emailRegex = \"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$\";\n" +
-                "    RegExp pattern = RegExp.compile(emailRegex);\n" +
-                "    return pattern.test(email);\n" +
-                "}";
-    }
+    private EmailValidatorExtended emailValidatorExtended;
+
+    private EmailValidatorStandard emailValidatorStandard;
+
+    private boolean isEmailValidatorWithExtensionInUse = false;
 
     @Override
     public void onModuleLoad() {
+        emailValidatorStandard = new EmailValidatorStandard();
+        emailValidatorExtended = new EmailValidatorExtended();
+
         addHelloButton();
         addTextArea();
-        addJunitTextArea();
-        addDeleteButton();
+        addValidationTextArea();
+        addValidateButton();
+        addResultButton();
     }
 
     void addTextArea() {
@@ -46,34 +46,78 @@ public class AppEntryPoint implements EntryPoint {
         });
     }
 
-    void addDeleteButton() {
-        final HTMLButtonElement button = (HTMLButtonElement) DomGlobal.document.getElementById("deleteButton");
+    void addValidateButton() {
+        final HTMLButtonElement button = (HTMLButtonElement) DomGlobal.document.getElementById("validateButton");
         button.addEventListener("click", (Event event) -> {
-            logger.info("Delete Button clicked");
-            makeSomethingFunny();
+            logger.info("Validate Button clicked");
+            validateEmail();
         });
     }
 
-    void makeSomethingFunny() {
+    void addValidationTextArea() {
+        final HTMLTextAreaElement junitTextArea = (HTMLTextAreaElement) DomGlobal.document.getElementById("validationTextArea");
+        junitTextArea.value = "boolean isEmailValid(String email) {\n" +
+                "    String emailRegex = \"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$\";\n" +
+                "    RegExp pattern = RegExp.compile(emailRegex);\n" +
+                "    return pattern.test(email);\n" +
+                "}";
+
+        isEmailValidatorWithExtensionInUse = false;
+    }
+
+    void addValidationWithExtensionTextArea() {
+        final HTMLTextAreaElement junitTextArea = (HTMLTextAreaElement) DomGlobal.document.getElementById("validationTextArea");
+        junitTextArea.value = "boolean isEmailValid(String email) {\n" +
+                "    String emailRegex = \"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$\";\n" +
+                "    RegExp pattern = RegExp.compile(emailRegex);\n" +
+                "    return pattern.test(email);\n" +
+                "}";
+
+        isEmailValidatorWithExtensionInUse = true;
+    }
+
+    void addResultButton() {
+        final HTMLButtonElement button = (HTMLButtonElement) DomGlobal.document.getElementById("resultButton");
+        button.addEventListener("click", (Event event) -> {
+            logger.info("Result Button clicked");
+
+            boolean isReset = button.textContent.equals("Ergebnis zurückstellen");
+            button.textContent = isReset ? "Lösung: Validation erweitern" : "Ergebnis zurückstellen";
+
+            if (isReset) {
+                addValidationTextArea();
+            } else {
+                addValidationWithExtensionTextArea();
+            }
+        });
+    }
+
+    void validateEmail() {
         final HTMLInputElement input = (HTMLInputElement) DomGlobal.document.getElementById("emailInput");
         String inputContent = input.value;
         if (inputContent.isEmpty()) {
             Window.alert("Bitte geben Sie eine E-Mail-Adresse ein.");
         } else {
-            boolean emailValid = isEmailValid(inputContent);
-            if (emailValid) {
-                Window.alert("E-Mail-Adresse " + inputContent + " ist valid, sie wird gelöscht.");
-                input.value = "";
-            } else {
-                Window.alert("E-Mail-Adresse " + inputContent + " ist ungültig.");
-            }
+            checkInput(inputContent, input);
         }
     }
 
-    boolean isEmailValid(String email) {
-        // String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-        RegExp pattern = RegExp.compile(emailRegex);
-        return pattern.test(email);
+    void checkInput(String inputContent, HTMLInputElement input) {
+        String validatorType = isEmailValidatorWithExtensionInUse ? "EmailValidatorExtended" : "EmailValidatorStandard";
+        logger.info(validatorType);
+
+        boolean emailValid = isEmailValidatorWithExtensionInUse ?
+                emailValidatorExtended.isEmailValid(inputContent) :
+                emailValidatorStandard.isEmailValid(inputContent);
+
+        String alertMessage = emailValid ?
+                "E-Mail-Adresse " + inputContent + " ist gültig, sie wird gelöscht." :
+                "E-Mail-Adresse " + inputContent + " ist ungültig.";
+
+        Window.alert(alertMessage);
+
+        if (emailValid) {
+            input.value = "";
+        }
     }
 }
