@@ -1,35 +1,46 @@
 package com.github.lofidewanto.viodevk.client;
 
-import elemental2.dom.HTMLButtonElement;
-import elemental2.dom.HTMLDocument;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockitoExtension.class)
 public class AppEntryPointTest {
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private HTMLDocument document;
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private HTMLButtonElement button;
-
     @BeforeEach
     public void setUp() {
     }
 
     @Test
-    public void addButton_created() {
-        AppEntryPoint appEntryPoint = spy(AppEntryPoint.class);
+    public void validateEmail_validEmail() {
+        AppEntryPoint appEntryPoint = new AppEntryPoint();
+        String validEmail = "test@example.com";
 
-        appEntryPoint.addHelloButton();
+        boolean emailValid = appEntryPoint.isEmailValid(validEmail);
 
-        verify(button, times(1)).addEventListener(eq("click"), any());
+        assertTrue(emailValid);
+    }
+
+    @Test
+    public void validateEmail_invalidEmail() {
+        AppEntryPoint appEntryPoint = new AppEntryPoint();
+        String invalidEmail = "invalid_email";
+
+        boolean emailValid = appEntryPoint.isEmailValid(invalidEmail);
+
+        assertFalse(emailValid);
+    }
+
+    @Test
+    public void validateEmail_invalidEmail_Without_Dot() {
+        AppEntryPoint appEntryPoint = new AppEntryPoint();
+        String invalidEmail = "invalid_email@example";
+
+        boolean emailValid = appEntryPoint.isEmailValid(invalidEmail);
+
+        assertTrue(emailValid);
     }
 }

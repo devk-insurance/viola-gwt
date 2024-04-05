@@ -1,11 +1,9 @@
 package com.github.lofidewanto.viodevk.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.user.client.Window;
-import elemental2.dom.DomGlobal;
-import elemental2.dom.Event;
-import elemental2.dom.HTMLButtonElement;
-import elemental2.dom.HTMLTextAreaElement;
+import elemental2.dom.*;
 
 import java.util.logging.Logger;
 
@@ -47,6 +45,18 @@ public class AppEntryPoint implements EntryPoint {
     }
 
     void makeSomethingFunny() {
+        final HTMLInputElement input = (HTMLInputElement) DomGlobal.document.getElementById("emailInput");
+        String inputContent = input.value;
+        if (inputContent.isEmpty()) {
+            Window.alert("Bitte geben Sie eine E-Mail-Adresse ein.");
+        } else {
+            isEmailValid(inputContent);
+        }
+    }
 
+    boolean isEmailValid(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        RegExp pattern = RegExp.compile(emailRegex);
+        return pattern.test(email);
     }
 }
