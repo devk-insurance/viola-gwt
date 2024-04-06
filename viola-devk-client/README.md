@@ -9,3 +9,7 @@ mvn gwt:generate-module gwt:devmode
 ```
 
 You'll notice that a Java Jetty server is up and running, providing the platform from which you can launch the web application.
+
+This is a simple screenshot of the web application. 
+
+![Screenshot](devk-game-javaland.png)

@@ -55,8 +55,8 @@ public class AppEntryPoint implements EntryPoint {
     }
 
     void addValidationTextArea() {
-        final HTMLTextAreaElement junitTextArea = (HTMLTextAreaElement) DomGlobal.document.getElementById("validationTextArea");
-        junitTextArea.value = "boolean isEmailValid(String email) {\n" +
+        final HTMLTextAreaElement validationTextArea = (HTMLTextAreaElement) DomGlobal.document.getElementById("validationTextArea");
+        validationTextArea.value = "boolean isEmailValid(String email) {\n" +
                 "    String emailRegex = \"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$\";\n" +
                 "    RegExp pattern = RegExp.compile(emailRegex);\n" +
                 "    return pattern.test(email);\n" +
@@ -66,8 +66,8 @@ public class AppEntryPoint implements EntryPoint {
     }
 
     void addValidationWithExtensionTextArea() {
-        final HTMLTextAreaElement junitTextArea = (HTMLTextAreaElement) DomGlobal.document.getElementById("validationTextArea");
-        junitTextArea.value = "boolean isEmailValid(String email) {\n" +
+        final HTMLTextAreaElement validationTextArea = (HTMLTextAreaElement) DomGlobal.document.getElementById("validationTextArea");
+        validationTextArea.value = "boolean isEmailValid(String email) {\n" +
                 "    String emailRegex = \"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$\";\n" +
                 "    RegExp pattern = RegExp.compile(emailRegex);\n" +
                 "    return pattern.test(email);\n" +
